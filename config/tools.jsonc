@@ -1,0 +1,81 @@
+// Copyright (c) My Context Menu Tools contributors.
+// Licensed under the MIT License.
+
+{
+  "menuTitle": "My Tools",
+  "menuTooltip": "Custom commands and legacy app integrations",
+  "menuIcon": "__appicon",
+  "items": [
+    {
+      "id": "developer-tools",
+      "title": "Developer Tools",
+      "children": [
+        {
+          "id": "open-terminal-admin-here",
+          "title": "Open in Terminal (Admin)",
+          "command": "wt.exe",
+          "arguments": "-d \"{container}\"",
+          "workingDirectory": "{container}",
+          "verb": "runas",
+          "appliesTo": ["folders", "folderBackgrounds", "desktopBackground"]
+        },
+        {
+          "id": "copy-folder-tree",
+          "title": "Copy folder tree to clipboard",
+          "tooltip": "Show progress while copying an ASCII tree of the folder and its files.",
+          "command": "cmd.exe",
+          "arguments": "/d /c title Copying folder tree to clipboard & echo Scanning this folder and all subfolders... & echo The folder tree will be copied to the clipboard when complete. & echo. & (tree /f /a | clip.exe)",
+          "workingDirectory": "{container}",
+          "appliesTo": ["folders", "folderBackgrounds", "desktopBackground"]
+        },
+        {
+          "id": "find-largest-files",
+          "title": "Find largest files here",
+          "tooltip": "Show scan progress, then report the 20 largest descendant files.",
+          "command": "powershell.exe",
+          "arguments": "-NoExit -NoProfile -Command \"$Host.UI.RawUI.WindowTitle='Finding largest files'; Write-Host ('Scanning ' + (Get-Location) + ' and all subfolders...'); Write-Host 'Results will appear when the scan completes. Large drives may take several minutes.'; Write-Host; $count=0; Get-ChildItem -File -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $count++; if (($count % 1000) -eq 0) { Write-Progress -Activity 'Scanning files' -Status ($count.ToString('N0') + ' files found') }; $_ } | Sort-Object Length -Descending | Select-Object -First 20 | ForEach-Object { '{0,12:N2} MB  {1}' -f ($_.Length / 1MB), $_.FullName }; Write-Progress -Activity 'Scanning files' -Completed\"",
+          "workingDirectory": "{container}",
+          "appliesTo": ["folders", "folderBackgrounds", "desktopBackground"]
+        },
+        {
+          "id": "make-backup-file",
+          "title": "Make .bak file",
+          "tooltip": "Copy each selected file to .bak, .bak (2), and so on.",
+          "action": "makeBackupFile",
+          "appliesTo": ["files"]
+        },
+        {
+          "id": "touch-file",
+          "title": "Touch file",
+          "tooltip": "Set each selected file's modified time to now.",
+          "action": "touchFile",
+          "appliesTo": ["files"]
+        },
+        {
+          "id": "copy-sha256",
+          "title": "Copy SHA-256 to clipboard",
+          "tooltip": "Copy the selected file's SHA-256 hash; multiple files include their paths.",
+          "action": "copySha256ToClipboard",
+          "appliesTo": ["files"]
+        }
+      ]
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "id": "open-tools-config",
+      "title": "Open My Tools config",
+      "tooltip": "Open the JSONC file that drives this menu",
+      "icon": "__appicon",
+      "command": "%LOCALAPPDATA%\\MyContextMenuTools\\tools.jsonc",
+      "appliesTo": ["files", "folders", "backgrounds"]
+    }
+
+    // Add modular app presets with scripts\Ensure-AppContextMenuPresets.ps1, or manually add:
+    // ,
+    // {
+    //   "include": "Presets\\7zip.jsonc"
+    // }
+  ]
+}

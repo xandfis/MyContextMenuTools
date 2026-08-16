@@ -1,0 +1,26 @@
+// Copyright (c) My Context Menu Tools contributors.
+// Licensed under the MIT License.
+
+{
+  "id": "super-delete",
+  "title": "Super Delete",
+  "icon": "__appicon",
+  "children": [
+    {
+      "id": "copy-locking-process-ids",
+      "title": "Copy locking process ID(s)",
+      "tooltip": "Detect processes locking the selected file and copy their process ID numbers to the clipboard.",
+      "icon": "__appicon",
+      "action": "copyLockingProcessIds",
+      "appliesTo": ["files"]
+    },
+    {
+      "id": "kill-locking-processes-and-delete",
+      "title": "Kill locking process(es) and delete",
+      "tooltip": "After confirmation, terminate processes locking the selected file and delete it.",
+      "icon": "__appicon",
+      "action": "deleteAfterKillingLockingProcesses",
+      "appliesTo": ["files"]
+    }
+  ]
+}

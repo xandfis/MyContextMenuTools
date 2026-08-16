@@ -1,0 +1,189 @@
+// Copyright (c) My Context Menu Tools contributors.
+// Licensed under the MIT License.
+
+{
+  "id": "7zip",
+  "title": "7-Zip",
+  "icon": "%ProgramFiles%\\7-Zip\\7zFM.exe",
+  "children": [
+    {
+      "id": "7zip-open",
+      "title": "Open archive",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zFM.exe",
+      "arguments": "%1",
+      "includeExtensions": [".7z", ".zip", ".rar", ".tar", ".gz", ".xz", ".bz2", ".cab", ".iso", ".wim"]
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "id": "7zip-extract-files",
+      "title": "Extract files...",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "x -ad %1",
+      "includeExtensions": [".7z", ".zip", ".rar", ".tar", ".gz", ".xz", ".bz2", ".cab", ".iso", ".wim"]
+    },
+    {
+      "id": "7zip-extract-here",
+      "title": "Extract here",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "x %1 -o{parent}",
+      "includeExtensions": [".7z", ".zip", ".rar", ".tar", ".gz", ".xz", ".bz2", ".cab", ".iso", ".wim"]
+    },
+    {
+      "id": "7zip-extract-to-folder",
+      "title": "Extract to \"{stem}\\\"",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "x %1 -o{parent}\\{stem}",
+      "includeExtensions": [".7z", ".zip", ".rar", ".tar", ".gz", ".xz", ".bz2", ".cab", ".iso", ".wim"]
+    },
+    {
+      "id": "7zip-test-archive",
+      "title": "Test archive",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "t %1",
+      "includeExtensions": [".7z", ".zip", ".rar", ".tar", ".gz", ".xz", ".bz2", ".cab", ".iso", ".wim"]
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "id": "7zip-add-to-archive",
+      "title": "Add to archive...",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -ad {parent}\\{name} %*",
+      "appliesTo": ["files", "folders"]
+    },
+    {
+      "id": "7zip-compress-and-email",
+      "title": "Compress and email...",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -ad -seml. {parent}\\{name} %*",
+      "appliesTo": ["files", "folders"]
+    },
+    {
+      "id": "7zip-add-to-7z",
+      "title": "Add to \"{name}.7z\"",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -t7z {parent}\\{name}.7z %*",
+      "appliesTo": ["files", "folders"]
+    },
+    {
+      "id": "7zip-compress-to-7z-and-email",
+      "title": "Compress to \"{name}.7z\" and email",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -t7z -seml. {parent}\\{name}.7z %*",
+      "appliesTo": ["files", "folders"]
+    },
+    {
+      "id": "7zip-add-to-zip",
+      "title": "Add to \"{name}.zip\"",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -tzip {parent}\\{name}.zip %*",
+      "appliesTo": ["files", "folders"]
+    },
+    {
+      "id": "7zip-compress-to-zip-and-email",
+      "title": "Compress to \"{name}.zip\" and email",
+      "icon": "__none",
+      "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+      "arguments": "a -tzip -seml. {parent}\\{name}.zip %*",
+      "appliesTo": ["files", "folders"]
+    },
+    // Optional CRC/SHA commands. Uncomment this block to enable them.
+    // {
+    //   "id": "7zip-crc-sha",
+    //   "title": "CRC SHA",
+    //   "icon": "__none",
+    //   "appliesTo": ["files", "folders"],
+    //   "children": [
+    //     {
+    //       "id": "7zip-crc32",
+    //       "title": "CRC-32",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcCRC32 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-crc64",
+    //       "title": "CRC-64",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcCRC64 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha1",
+    //       "title": "SHA-1",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcSHA1 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha256",
+    //       "title": "SHA-256",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcSHA256 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha384",
+    //       "title": "SHA-384",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcSHA384 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha512",
+    //       "title": "SHA-512",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcSHA512 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha3-256",
+    //       "title": "SHA3-256",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "h -scrcSHA3-256 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "type": "separator",
+    //       "appliesTo": ["files", "folders"]
+    //     },
+    //     {
+    //       "id": "7zip-sha256-file",
+    //       "title": "SHA-256 -> {name}.sha256",
+    //       "icon": "__none",
+    //       "command": "%ProgramFiles%\\7-Zip\\7zG.exe",
+    //       "arguments": "a -thash -sae {parent}\\{name}.sha256 %*",
+    //       "appliesTo": ["files", "folders"]
+    //     }
+    //   ]
+    // },
+    {
+      "id": "edit-7zip-config",
+      "title": "Edit 7-Zip config",
+      "tooltip": "Open the deployed JSONC preset to customize optional commands.",
+      "icon": "__none",
+      "command": "%LOCALAPPDATA%\\MyContextMenuTools\\Presets\\7zip.jsonc",
+      "appliesTo": ["files", "folders"]
+    }
+  ]
+}

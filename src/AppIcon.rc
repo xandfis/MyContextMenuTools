@@ -1,0 +1,4 @@
+// Copyright (c) My Context Menu Tools contributors.
+// Licensed under the MIT License.
+
+IDI_APPICON ICON "..\\Assets\\Extension.ico"

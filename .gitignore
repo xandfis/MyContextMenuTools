@@ -1,0 +1,5 @@
+build/
+.winapp/
+*.user
+*.msix
+*.appx

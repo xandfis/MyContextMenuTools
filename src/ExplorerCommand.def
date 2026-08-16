@@ -1,0 +1,8 @@
+; Copyright (c) My Context Menu Tools contributors.
+; Licensed under the MIT License.
+
+LIBRARY "MyContextMenuToolsExplorerCommand"
+
+EXPORTS
+  DllCanUnloadNow PRIVATE
+  DllGetClassObject PRIVATE

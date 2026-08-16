@@ -1,0 +1,12 @@
+// Copyright (c) My Context Menu Tools contributors.
+// Licensed under the MIT License.
+
+{
+  "id": "notepad-plus-plus",
+  "title": "Edit with Notepad++",
+  "icon": "%ProgramFiles%\\Notepad++\\notepad++.exe",
+  "command": "%ProgramFiles%\\Notepad++\\notepad++.exe",
+  "arguments": "%*",
+  "appliesTo": ["files"],
+  "excludeExtensions": [".exe", ".dll", ".sys", ".obj", ".lib", ".pdb", ".png", ".jpg", ".jpeg", ".gif", ".zip", ".7z", ".rar", ".msi", ".msix", ".pdf"]
+}
