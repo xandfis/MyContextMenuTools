@@ -515,6 +515,30 @@ std::wstring JoinPaths(const std::vector<SelectionItem>& selection, bool quote) 
   return result;
 }
 
+void ReplaceCommandValue(std::wstring& text,
+                         const std::wstring& placeholder,
+                         const std::wstring& value,
+                         bool quoteValue) {
+  if (!quoteValue) {
+    ReplaceAll(text, placeholder, value);
+    return;
+  }
+
+  const auto replacement = QuoteArgument(value);
+  ReplaceAll(text, L"\"" + placeholder + L"\"", replacement);
+  ReplaceAll(text, placeholder, replacement);
+}
+
+void ReplaceCommandValues(std::wstring& text,
+                          const std::wstring& placeholder,
+                          const std::wstring& values,
+                          bool quoteValues) {
+  if (quoteValues) {
+    ReplaceAll(text, L"\"" + placeholder + L"\"", values);
+  }
+  ReplaceAll(text, placeholder, values);
+}
+
 std::wstring ExpandCommandText(const std::wstring& input,
                                const ToolItem& item,
                                const std::vector<SelectionItem>& selection,
@@ -529,17 +553,17 @@ std::wstring ExpandCommandText(const std::wstring& input,
   const std::wstring namedPath = parent.empty() || name.empty() ? L"" : JoinPath(parent, name);
   const std::wstring stemPath = parent.empty() || stem.empty() ? L"" : JoinPath(parent, stem);
 
-  ReplaceAll(result, L"%1", quoteValues ? QuoteArgument(firstPath) : firstPath);
-  ReplaceAll(result, L"%*", JoinPaths(selection, quoteValues));
-  ReplaceAll(result, L"{path}", quoteValues ? QuoteArgument(firstPath) : firstPath);
-  ReplaceAll(result, L"{paths}", JoinPaths(selection, quoteValues));
-  ReplaceAll(result, L"{parent}\\{name}", quoteValues ? QuoteArgument(namedPath) : namedPath);
-  ReplaceAll(result, L"{parent}\\{stem}", quoteValues ? QuoteArgument(stemPath) : stemPath);
-  ReplaceAll(result, L"{container}", quoteValues ? QuoteArgument(container) : container);
-  ReplaceAll(result, L"{parent}", quoteValues ? QuoteArgument(parent) : parent);
-  ReplaceAll(result, L"{name}", quoteValues ? QuoteArgument(name) : name);
-  ReplaceAll(result, L"{stem}", quoteValues ? QuoteArgument(stem) : stem);
-  ReplaceAll(result, L"{id}", quoteValues ? QuoteArgument(item.id) : item.id);
+  ReplaceCommandValue(result, L"%1", firstPath, quoteValues);
+  ReplaceCommandValues(result, L"%*", JoinPaths(selection, quoteValues), quoteValues);
+  ReplaceCommandValue(result, L"{path}", firstPath, quoteValues);
+  ReplaceCommandValues(result, L"{paths}", JoinPaths(selection, quoteValues), quoteValues);
+  ReplaceCommandValue(result, L"{parent}\\{name}", namedPath, quoteValues);
+  ReplaceCommandValue(result, L"{parent}\\{stem}", stemPath, quoteValues);
+  ReplaceCommandValue(result, L"{container}", container, quoteValues);
+  ReplaceCommandValue(result, L"{parent}", parent, quoteValues);
+  ReplaceCommandValue(result, L"{name}", name, quoteValues);
+  ReplaceCommandValue(result, L"{stem}", stem, quoteValues);
+  ReplaceCommandValue(result, L"{id}", item.id, quoteValues);
   return result;
 }
 

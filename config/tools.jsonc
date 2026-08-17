@@ -14,7 +14,7 @@
           "id": "open-terminal-admin-here",
           "title": "Open in Terminal (Admin)",
           "command": "wt.exe",
-          "arguments": "-d \"{container}\"",
+          "arguments": "-d {container}",
           "workingDirectory": "{container}",
           "verb": "runas",
           "appliesTo": ["folders", "folderBackgrounds", "desktopBackground"]

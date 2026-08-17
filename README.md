@@ -55,7 +55,7 @@ The config format is JSON with comments (`.jsonc`) and supports modular preset i
           "id": "open-terminal-admin-here",
           "title": "Open in Terminal (Admin)",
           "command": "wt.exe",
-          "arguments": "-d \"{container}\"",
+          "arguments": "-d {container}",
           "workingDirectory": "{container}",
           "verb": "runas",
           "appliesTo": ["folders", "folderBackgrounds", "desktopBackground"]
@@ -95,6 +95,8 @@ Items can be modularized with `{ "include": "relative\\path.jsonc" }` or `{ "$in
 Divider lines can be represented with `{ "type": "separator" }` or `{ "separator": true }`. On versions of Windows 11 that predate fixes for `ECF_ISSEPARATOR` rendering in the modern context menu, those entries are ignored at runtime. The parser keeps accepting them so configs can leave separators in place and enable them when the platform behavior is available.
 
 Command placeholders:
+
+Standalone placeholder values in `arguments` are quoted automatically when needed. Do not add another pair of quotes around a standalone placeholder; legacy forms such as `"{container}"` are normalized at runtime.
 
 | Placeholder | Meaning |
 | --- | --- |
