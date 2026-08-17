@@ -129,7 +129,7 @@ The script uses `winget`, reuses a working Visual Studio installation when one i
 
 | Tooling | Needed for | Notes |
 | --- | --- | --- |
-| PowerShell | All scripts | Windows PowerShell 5.1 or PowerShell 7+ is fine. |
+| PowerShell | All scripts | Windows PowerShell 7+ |
 | Visual Studio Build Tools 2022 | Native C++ compilation | Installed from `Microsoft.VisualStudio.2022.BuildTools` with the C++ Build Tools workload, MSVC for the selected architecture, and Windows 11 SDK 26100. The SDK supplies the headers, libraries, and `rc.exe` resource compiler used by `Build.ps1`. |
 | NuGet CLI | Native library restore | Installed from `Microsoft.NuGet`. `Build.ps1` restores pinned Microsoft WIL and C++/WinRT packages from `packages.config`. |
 | Windows App Development CLI | Debug package registration | Installed from `Microsoft.WinAppCli`; its `winapp.exe` creates the debug package identity used by the registration scripts. |
